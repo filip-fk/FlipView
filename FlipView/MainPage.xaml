@@ -7,7 +7,49 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    </Grid>
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Dictionary1.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid x:Name="Output" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1">
+        <Grid.Projection>
+            <PlaneProjection GlobalOffsetY="10"/>
+        </Grid.Projection>
+        <FlipView x:Name="FlipView4" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,10,110" Background="{x:Null}">
+                <FlipView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Image Source="{Binding Image}" Stretch="UniformToFill"/>
+                            <Border Background="{StaticResource MyAcrylicBrush}" Height="80" VerticalAlignment="Bottom">
+                                <TextBlock Text="{Binding Title}" FontFamily="Segoe UI" FontSize="27" Foreground="Black" Padding="15,20"/>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </FlipView.ItemTemplate>
+                <FlipView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </FlipView.ItemsPanel>
+            </FlipView>
+            <ListBox x:Name="ContextControl" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" SelectedItem="{Binding SelectedItem, ElementName=FlipView4, Mode=TwoWay}" Grid.Row="1" BorderThickness="0" Height="100" ItemContainerStyle="{StaticResource ContextControlItemStyle}" IsTabStop="False" Margin="0,-5,0,0" Style="{StaticResource ListBoxStyle1}" ScrollViewer.HorizontalScrollBarVisibility="Auto" Background="{StaticResource MyAcrylicBrush2}" BorderBrush="{x:Null}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+        </Grid>
+        <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="DefaultLayout"/>
+                <VisualState x:Name="Below768Layout"/>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        -->
+    
 </Page>
